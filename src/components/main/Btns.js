@@ -30,6 +30,11 @@ function Btns() {
     }
     useEffect(() => {
         //세로 위치값을 초기화하는 작업
+
+        // 이거 안 넣어주면 새로고침했을 때 그냥 그 자리에 있음
+        // 넣어줌 -> 새로고침 -> 부드럽게 위로 올라가게 해줌
+        window.scrollTo({top:0,left:0, behavior:"smooth"})
+
         getPos();
         //브라우저가 리사이즈 될때도 
         window.addEventListener("resize", getPos);

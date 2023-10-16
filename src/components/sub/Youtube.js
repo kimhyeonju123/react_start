@@ -18,9 +18,7 @@ function Youtube() {
 	const [Vid, setVid] = useState([]); //url정보를 받아오는 state
 	const [open, setOpen] = useState(false); //유튜브 보여줄까~말까 state
 	const [Index, setIndex] = useState(0); // 인덱스 관리 state
-	// 
 	
-
 	useEffect(()=>{
 		axios.get(url).then(
 			(json)=>{
