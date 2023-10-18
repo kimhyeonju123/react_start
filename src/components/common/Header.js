@@ -16,7 +16,7 @@ export default function Header({ type }) {
     // 참이면 logoURL에 ./img/logo_w.png
     // 거짓이면 logoURL에 ./img/logo_b.png
     // (type === 'main') ? (logoURL = './img/logo_w.png') : (logoURL = './img/logo_b.png') 쌤코드
-    logoURL = (type === 'main') ? ('./img/logo_w.png') : ('./img/logo_b.png')
+    logoURL = (type === 'main') ? ('/img/logo_w.png') : ('/img/logo_b.png')
     return (
         <header className={type}>
             <h1>
