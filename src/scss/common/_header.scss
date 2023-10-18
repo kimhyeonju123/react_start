@@ -105,24 +105,24 @@ header {
 	}
 }
 
-// @media screen and (max-width: $web_s) {
-// 	header {
-// 		nav {
-// 			width: 75%;
-// 		}
-// 	}
-// }
+@media screen and (max-width: $web_s) {
+	header {
+		nav {
+			width: 75%;
+		}
+	}
+}
 
-// @media screen and (max-width: $tablet) {
-// 	header {
-// 		nav {
-// 			width: 25%;
-// 			#gnb {
-// 				display: none;
-// 			}
-// 		}
-// 		.fa-bars {
-// 			display: block;
-// 		}
-// 	}
-// }
+@media screen and (max-width: $tablet) {
+	header {
+		nav {
+			width: 25%;
+			#gnb {
+				display: none;
+			}
+		}
+		.fa-bars {
+			display: block;
+		}
+	}
+}
