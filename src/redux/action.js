@@ -1,11 +1,11 @@
 /*
-1. 액션을 생성한다
-    -액션이랑 상태(state)를 변경하도록 요청하는 객체
+1. 액션을 생성합니다
+액션이란 상태를 변경하도록 요청하는 객체입니다
+*/
 
-*/ 
-export const setMembers = (member)=>{
-    return{
-        type:'SET_MEMBERS',
+export const setMembers = (member) => {
+    return {
+        type: "SET_MEMBERS",
         payload: member
     }
 }

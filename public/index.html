@@ -7,91 +7,151 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>React App</title>
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3180857568184579a8145861c8f2822d"></script>
+  <style>
+    .defaults {
+      position: absolute;
+      top: -999999px;
+    }
 
+    .mask {
+      width: 100%;
+      height: 100vh;
+      background: #111;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 5;
+      opacity: 1;
+      transition: opacity 2s;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font: 20px/1 'arial';
+      color: #fff;
+    }
+
+    .mask.off {
+      opacity: 0;
+    }
+  </style>
 </head>
 
 <body>
+
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <div id="root"></div>
-  <div class="defaults">검색봇이 SEO를 위해서 읽도록하는 텍스트데이터를 작성하는 곳</div>
-  <div class="mask">로딩중... 혹은 이미지 등으로 로딩을 표현하는 곳</div>
+  <div class="defaults">검색봇이 SEO를 위해서 읽도록하는 텍스트 데이터 작성</div>
+  <div class="mask">로딩중... 혹은 이미지로 작성가능</div>
+
   <script>
     const defaults = document.querySelector('.defaults');
     const mask = document.querySelector('.mask');
     let tags = '';
-    const baseURL = 'https://kimhyeonju123.github.io/react_start';
+    const baseURL = 'https://22-07-react.github.io/react_pf';
     const imgs = [
       baseURL + '/img/Community.jpg',
       baseURL + '/img/Department.jpg',
       baseURL + '/img/Gallery.jpg',
       baseURL + '/img/Location.jpg',
       baseURL + '/img/Youtube.jpg',
-      baseURL + '/img/Members.jpg',
+      baseURL + '/img/Members.jpg'
     ];
     const vids = [
-      baseURL + '/img/vid.mp4',
-    ]
+      baseURL + '/img/vid.mp4'
+    ];
+    const lenImg = imgs.length;
+    const lenVid = vids.length;
 
+
+    createDOM();
+
+
+
+
+    Promise.all([loadImg(), loadVid()]).then(result => {
+      console.log(result); //[true, true]
+      const [loadedImg, loadedVid] = result;
+
+      //두함수의 반환값이 모두 true이면 (영상, 이미지가 모두 로딩완료되면)
+      if (loadedImg && loadedVid) {
+        console.log('mask-hide');
+        mask.classList.add('off');
+
+        setTimeout(() => {
+          mask.remove();
+          defaults.remove();
+        }, 2000)
+      }
+    })
+
+
+
+    //DOM생성함수
     function createDOM() {
-      imgs.forEach((el) => {
-        tags += `<img src=${el}>`
-      });
-      vids.forEach(el,()=>{
-        tags += `<video src=${el}></video>`
+      imgs.forEach(src => {
+        tags += `<img src=${src} />`
+      })
+      vids.forEach(src => {
+        tags += `<video src=${src}></video>`
       })
       defaults.innerHTML = tags;
     }
-    // Promise.all() 프로미스 객체를 반환할 때까지 기다린 후
-    // resolve true가 반환되면 동기화 처리를 하는 함수
-    Promise.all([loadImg(), loadVid()]).then(result =>{
-      console.log(result);
-      const [loadImg, loadVid] = result;
-    })
 
-    // 영상 및 이미지 소스가 모두 로딩이 완료되면
-    // 프로미스 객체 resolve로 true가 반환되는 함수를 제작한다
-    let lenImg = imgs.length;
+
     function loadImg() {
-      return new Promise((res, rej)=>{
+      return new Promise((res, rej) => {
         let countImg = 0;
         const imgDOM = defaults.querySelectorAll('img');
 
-        imgDOM.forEach(el=>{
-          el.onload = ()=>{
+        imgDOM.forEach(img => {
+          img.onload = () => {
             countImg++;
-            if(countImg === lenImg){
+            console.log('img loaded..', countImg);
+            if (countImg === lenImg) {
               res(true);
             }
           }
         })
       })
     }
-    let lenVid = imgs.length;
+    //영상소스가 모두 로딩완료되면 프로미스 객체로 true반환 함수
     function loadVid() {
-      return new Promise((res, rej)=>{
+      return new Promise((res, rej) => {
         let countVid = 0;
         const vidDOM = defaults.querySelectorAll('video');
 
-        vidDOM.forEach(el=>{
-          el.onload = ()=>{
+        vidDOM.forEach(vid => {
+          vid.onloadeddata = () => {
             countVid++;
-            if(countVid === lenVid){
+            console.log('video loaded..', countVid);
+            if (countVid === lenVid) {
               res(true);
             }
           }
         })
       })
     }
+
   </script>
 </body>
 
 </html>
 
 <!-- 
-  현재 비디오를 기존의 방식대로 넣게되면 검은색 배경, 혹은 이미지가 잠시 보이는 모습으로 구현된다
-  구현방법 1. 웹서버에 업로드하고(ex. 구글드라이브) url을 받아서 src에 첨부하는 방법
-  구현방법 2. 강제로 비디오와 큰 이미지들을 먼저 캐싱하도록 html에 dom요소로 넣는 방법
-  (현재 우리가 사용할 방법은 2번 방법이다.)
- -->
+  현재 비디오를 기존의 방식대로 넣게되면 검은색 배경, 혹은 이미지가 잠시 보이는 모습으로 구현된다
+  구현방법 1. 웹서버에 업로드하고(ex. 구글드라이브) url을 받아서 src에 첨부하는 방법
+  구현방법 2. 강제로 비디오와 큰 이미지들을 먼저 캐싱하도록 html에 dom요소로 넣는 방법
+  (현재 우리가 사용할 방법은 2번 방법이다.)
 
- <!-- https://kimhyeonju123.github.io/react_start -->
+		- 정리 -
+	강제로 이미지와 비디오를 캐싱하는 방법은
+	index.html에 DOM을 만들고 (디폴트 파라미터) 해당 돔에 캐싱할 이미지와 비디오를 innerHTML로 넣는다
+	리얼DOM으로는 이미지와 비디오가 캐싱 중일 경우엔 마스크를 씌워서 로딩중임을 사용자에게 알린다
+	-> 해당 로딩함수(loadImg, loadVid)를 통해서 로딩이 완료되는 시점을 찾는다
+	-> 로딩이 완료되면 마스크에 opacity:0을 부여하여 안보이도록 한다
+	-> index.html에 DOM(디폴트)으로 만든 디폴트와 마스크를 완전히 remove한다
+
+	이렇게 된다면 이미지와 비디오의 소스는 캐싱된 상태에서 보이지 않게되므로 더 쾌적하게 이미지와 비디오를 로드하여 구현할 수 있다
+ -->
+
+<!-- https://OhEunT.github.io/react_2023.10.18 -->

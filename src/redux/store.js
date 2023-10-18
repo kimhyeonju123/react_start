@@ -5,5 +5,4 @@ import reducers from "./reducer";
 // 전달된 reducer를 받아서 저장하고 내보내는 작업이 필요하다
 // 그래서
 const store = createStore(reducers);
-
-export default store;
+export default store
