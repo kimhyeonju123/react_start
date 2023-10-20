@@ -1,93 +1,80 @@
-import { useState,useEffect } from 'react'
 import React from 'react'
 import Layout from '../common/Layout'
-import axios from 'axios';
 
-// 여긴 if, 기본 for문 같은 건 사용해도 무방함
+import { useSelector } from 'react-redux';
+
+
 function Department() {
-	// jsx문법
-	const [Members, setMembers] = useState([]);
-	const [Colors, setColors] = useState([]);
-	const path = process.env.PUBLIC_URL;
-	useEffect(()=>{
-		axios.get(process.env.PUBLIC_URL + '/DB/members.json')
-			.then(
-				(json)=>{
-					setMembers(json.data.members);
-					setColors(json.data.backGround);
-				}
-			)
-	},[]);
+  const path = process.env.PUBLIC_URL;
 
-	useEffect(()=>{
-		console.log(Members)
-	},[Members])
+  const Members = useSelector((store) => store.memberReducer.members);
+  /*
+  index.js에서 Provider로 store를 App.js에 연결하였으므로 어플리케이션 전역에서 store에 접근이 가능합니다
+  따라서 기존의 DB가 아닌 store있는 정보를 가지고 오는 과정입니다
+  useSelector로 store에 접근
+   store에 있는 memberReducer함수에 접근합니다
+   함수 안에있는 키인 members에 접근하면
+   reducer로 액션을 가져온 initMember가 존재하므로
+   기존과 같은 DB를 불러올수 있는것입니다
+  */
 
-	return (
-		// 엄격하게 얘기한다면 여기가 jsx문법 (반드시 지켜야 함)
-		// if문을 사용하면 안되는 이유 + 기본 for문을 사용하면 안되는 이유
-		// if문 같은 경우. if(){}else if/else 의 순서가 꼬임(그대로 읽지를 못하기 때문) 
-		// -> 삼항연산자 / &&등의 논리연산자로 조건문을 수행해야 함
-		// 반복문도 리액트에서는 반복할 때 각 요소 별로 고유 키값이 부여되어야 함
-		// 하지만 기본 for문은 불가능
-		// -> map으로 반복문을 사용한다
-		<Layout name={'Department'}>
-			{Members.map((el, index)=>(
-				<article key={index}>
-					<div className="inner">
-						<div className="picFrame">
-							<div className="reflect">
-								<img src={`${path}/img/${el.pic}`} alt={el.name} />
-							</div>
-							<div className="pic" >
-								<img src={`${path}/img/${el.pic}`} alt={el.name} />
-							</div>
-						</div>
-						<h2>{el.name}</h2>
-						<p>{el.position}</p>
-					</div>
-				</article>
-			))}
-			{/* members에 반복을 돌면서 백그라운드를 가져와서 임의로 꾸며보세요 */}
-			{/* {Colors.map((el,index)=>(
-				<article key={index}>
-					<div className="inner">
-						<h1 style={{backgroundColor:`${el.backGroundColor}`}}>{el.color}</h1>
-						<p style={{color:`${el.color}`}}>{el.backGroundColor}</p>
-					</div>
-				</article>
-			))} */}
-		</Layout>
-	)
+
+  return (
+    <Layout name={"Department"}>
+      {Members.map((el, index) => (
+        <article key={index}>
+          <div className="inner">
+            <div className="picFrame">
+              <div className="reflect">
+                <img src={`${path}/img/${el.pic}`} alt={el.name} />
+              </div>
+              <div className="pic">
+                <img src={`${path}/img/${el.pic}`} alt={el.name} />
+              </div>
+            </div>
+
+            <h2>{el.name}</h2>
+            <p>{el.position}</p>
+          </div>
+        </article>
+      ))}
+
+    </Layout>
+  )
 }
-
+// jsx문법
+//if문을 쓰면안되는이유, 기본for문을 사용하면 안되는이유
+//if문경우 if () else /else  그 순서대로 읽지를 못하기 때문에 -> 3항연산자나 &&등의 논리연산자로 조건문을 수행하여야한다
+//반복문도 리액트에서는 반복할때 각 반복되는 요소별로 고유 key값이 부여되어야하는데 기본for문은 할수없고, 따라서 map으로 반복문을 사용합니다
 export default Department
-
 /*
 axios vs fetch
 
-axios
-- 설치가 필요함
-- 보안기능 제공
-- 자동 json 데이터 변환 지원
-- http 요청 기본 제공
-- 다운로드 프로세스 지원
+axios 에대한 설명
+axios는 설치가 필요하다
+보안기능을 제공한다
+자동으로JSON데이터변환을 지원합니다
+http요청을 기본적으로 제공합니다
+다운로드 프로세스를 지원합니다
 
-fetch
-- 설치 필요 X
-- 보안기능 X **중요**
-- 수동 json 데이터 변환 핸들링 필요
-- http 요청 제공 X
-- 다운로드 프로세스 지원 X
+fetch에 대한 설명
+fetch는 설치가 필요없다
+보안기능이 없음 
+수동으로 JSON데이터 변환을 핸들링해줘야함
+http요청을 제공하지않음
+다운로드 프로세스도 지원안함
 
-*/ 
+
+*/
+
+
+
 
 
 
 /*
-SSR vs CSR
-:웹페이지 렌더링 방식에 대한 개념임
-(서버 vs 클라이언트)
+SSR  vs CSR
+웹페이지 렌더링 방식에 대한 개념
 
 SPA vs MPA
 SPA (Single Page Application)
@@ -95,28 +82,29 @@ MPA (Multi Page Application)
 
 웹 애플리케이션의 구조와 페이지 전환 방식에 대한 개념
 
-SPA : 한 개의 html페이지만 가지며, 필요한 콘텐츠는 동적으로 js를 통해서 로드
-이후 사용자와의 상호작용에 따라서 페이지를 새로고침 없이 동적으로만 업데이트
--> react (SPA + CSR)
+SPA 는 한개의 html페이지만 가지며, 필요한 콘텐츠는 동적으로 JS를 통해서
+로드를 합니다
+이후 사용자와의 상호작용에 따라서 페이지를 새로고침없이 동적으로만 업데이트를 합니다
+-> react
 
-MPA : 전통적인 웹 애플리케이션 방식
-각각의 페이지마다 고유한 URL을 부여한다
-사용자 요청에 따라 새로운 페이지를 전달하는 방식
-
-
-리액트 - CSR의 렌더링 방식으로 SPA의 구조와 페이지 전환 방식으로 구현된 웹 어플리케이션을 만드는 도구
-
-(리액트를 사용하면서 추가적으로 알아야하는 사항)
-SSR을 사용하는 SPA
-NEXT.js : 리액트 기반 SSR 지원 프레임워크
-
-MPA -> CSR을 덧입히는 것 : 블로그 포스팅 방식
-
-상품목록 페이지 는 전통적인 SSR을 가져옴
-하지만 필터링을 하거나 정렬을 할 때는 동적으로만 하도록 CSR을 덧붙이는 하이브리드로 사용하기도 한다
-
-(오늘날 사용 방법)
-전부 사용함 but 기준은 사용성, 개발의 편의성을 고려해서 전부 사용하는 것
+MPA는 전통적인 웹 애플리케이션 방식입니다
+각각의 페이지마다 고유한 URL을 부여합니다, 사용자 요청에 따라서
+새로운 페이지를 전달하는 방식입니다
 
 
-*/ 
+리액트는 CSR의 렌더링 방식으로 SPA의 구조와 페이지 전환 방식으로 구현된
+웹어플리케이션을 만드는 도구입니다
+
+SSR을 사용하는 SPA가 있습니다
+NEXT.js라는 리액트 기반 SSR지원하는 프레임워크입니다
+
+MPA - CSR덧입히는것 - 블로그 포스팅방식
+상품 목록페이지는 전통적인 SSR을 가져오고
+하지만 필터링을 하거나 정렬할 때는 동적으로만 하도록 CSR을 덧붙이는 
+하이브리드로 사용하기도 합니다
+
+
+
+
+
+*/

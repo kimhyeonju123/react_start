@@ -5,20 +5,19 @@ $tablet: 1279px;
 $moblie: 539px;
 
 //common
+
 @import './common/reset';
 @import './common/header';
 @import './common/footer';
 @import './common/layout';
-@import 'common/pop';
-@import 'common/menu';
-
+@import './common/pop';
+@import './common/menu';
 //main
+@import './main/btns';
+@import './main/news';
+@import './main/vids';
 @import './main/content';
 @import './main/visual';
-@import 'main/btns';
-@import 'main/news';
-@import 'main/vids';
-
 //sub
 @import './sub/department';
 @import './sub/community';

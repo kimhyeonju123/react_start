@@ -1,5 +1,5 @@
 {
-  "homepage": "https://kimhyeonju123.github.io/react_start",
+  "homepage": "https://OhEunT.github.io/react_2023.10.18",
   "name": "test",
   "version": "0.1.0",
   "private": true,
@@ -9,6 +9,7 @@
     "@fortawesome/free-regular-svg-icons": "^6.4.2",
     "@fortawesome/free-solid-svg-icons": "^6.4.2",
     "@fortawesome/react-fontawesome": "^0.2.0",
+    "@reduxjs/toolkit": "^1.9.5",
     "axios": "^0.27.2",
     "framer-motion": "^6.5.1",
     "react": "^17.0.2",
@@ -18,14 +19,15 @@
     "react-router-dom": "^5.3.1",
     "react-scripts": "5.0.1",
     "redux": "^4.2.0",
-    "sass": "^1.51.0"
+    "sass": "^1.51.0",
+    "swiper": "^8.3.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy": "npm run build", 
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
   "eslintConfig": {

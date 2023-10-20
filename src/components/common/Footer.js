@@ -3,6 +3,7 @@ import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { faFacebook } from "@fortawesome/free-brands-svg-icons";
 
+
 export default function Footer() {
     return (
         <footer>
@@ -12,10 +13,10 @@ export default function Footer() {
                 </h1>
                 <nav>
                     <dl>
-                        <dt>COMMUNITY</dt>
+                        <dt>COMMUNTY</dt>
                         <dd>About</dd>
                         <dd>Submit on Issue</dd>
-                        <dd>GIthub Repo</dd>
+                        <dd>Github Repo</dd>
                         <dd>Slack</dd>
                     </dl>
                     <dl>
@@ -25,7 +26,7 @@ export default function Footer() {
                         <dd>Usage</dd>
                         <dd>Globals</dd>
                         <dd>Elements</dd>
-                        <dd>Collection</dd>
+                        <dd>Collections</dd>
                         <dd>Themes</dd>
                     </dl>
                     <dl>
@@ -41,12 +42,12 @@ export default function Footer() {
                 </nav>
             </div>
             <div className="lower">
-                <p>&copy; 2023 Converse All right reserved</p>
+                <p>&copy; 2023 Converse All rights reserved</p>
                 <ul className="terms">
                     <li>Terms of Service</li>
                     <li>Privacy Policy</li>
                     <li>Security</li>
-                    <li>Sitmap</li>
+                    <li>Sitemap</li>
                 </ul>
                 <ul className="sns">
                     <li>

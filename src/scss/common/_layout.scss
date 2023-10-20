@@ -13,12 +13,11 @@
 		h1 {
 			position: absolute;
 			left: 0vw;
-			bottom: -31px;
+			bottom: -32px;
 			font: 200px/1 'arial';
 			color: #efefef;
 			opacity: 0;
 			transition: 1s 0.5s;
-			// 배경이 나타나고 글자가 스윽
 		}
 	}
 	> .inner {
@@ -30,6 +29,7 @@
 		transition: 1s 0.8s;
 		position: relative;
 	}
+
 	&.on {
 		figure {
 			opacity: 1;
@@ -40,7 +40,7 @@
 		}
 		> .inner {
 			opacity: 1;
-			transform: translateY(0);
+			transform: translateY(0px);
 		}
 	}
 }

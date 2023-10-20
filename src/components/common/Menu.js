@@ -1,27 +1,27 @@
-import { useState,useRef,forwardRef,useImperativeHandle, useEffect } from "react"
-import {NavLink, Link} from 'react-router-dom';
-import { AnimatePresence,motion } from "framer-motion";
+import { useState, useRef, forwardRef, useImperativeHandle, useEffect } from "react"
+import { NavLink, Link } from "react-router-dom/cjs/react-router-dom.min"
+import { AnimatePresence, motion } from "framer-motion";
 
 const Menu = forwardRef((props, ref) => {
     const [Open, setOpen] = useState(false);
-    const active = { color: "orange" };
-    useImperativeHandle(ref,()=>{
-        return{
-            toggle:()=>setOpen(!Open)
+    const active = { color: "orange" }
+    useImperativeHandle(ref, () => {
+        return {
+            toggle: () => setOpen(!Open),
         }
     })
-
-    return (        
+    return (
         <AnimatePresence>
             {Open && (
                 <motion.nav id="mobileGnb"
-                    onClick={()=>setOpen(!Open)}
-                    initial={{opacity:0, x:-320}}
-                    animate={{opacity:1, x:0, transition:{duration:.5}}}
-                    exit={{opacity:0, x:-320, transition:{duration:.5}}}>
+                    onClick={() => setOpen(!Open)}
+                    initial={{ opacity: 0, x: -320 }}
+                    animate={{ opacity: 1, x: 0, transition: { duration: 0.5 } }}
+                    exit={{ opacity: 0, x: -320, duration: 0.5 }}
+                >
                     <h1>
-                        <Link to='/'>
-                            <img src={process.env.PUBLIC_URL+'/img/logo_w.png'} alt="logo" />
+                        <Link to="/">
+                            <img src={process.env.PUBLIC_URL + "/img/logo_w.png"} alt="logo" />
                         </Link>
                     </h1>
                     <ul>
@@ -58,7 +58,9 @@ const Menu = forwardRef((props, ref) => {
                     </ul>
                 </motion.nav>
             )}
+
         </AnimatePresence>
+
     )
 })
 

@@ -1,4 +1,4 @@
-.pop{
+.pop {
 	width: 100%;
 	height: 100vh;
 	background-color: rgba(0, 0, 0, 0.8);
@@ -7,17 +7,19 @@
 	top: 0;
 	left: 0;
 	z-index: 5;
-	.con{
+	.con {
 		width: 100%;
 		height: 100%;
-		video,iframe,img {
+		video,
+		iframe,
+		img {
 			width: 100%;
 			height: 100%;
 			object-fit: cover;
 		}
 	}
 	.close {
-		font: bold 100px/1 'arial';
+		font: bold 14px/1 'arial';
 		color: orange;
 		position: absolute;
 		top: 2vw;

@@ -1,15 +1,16 @@
-#mobileGnb{
+#mobileGnb {
 	width: 320px;
 	height: 100%;
 	position: fixed;
-	top: 0;left: 0;
+	top: 0;
+	left: 0;
 	background-color: #111;
 	z-index: 5;
 	padding: 50px;
-	h1{
+	h1 {
 		margin-bottom: 50px;
 	}
-	ul li a{
+	ul li a {
 		display: block;
 		height: 50px;
 		font: 16px/50px 'arial';
